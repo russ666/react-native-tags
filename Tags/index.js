@@ -73,7 +73,14 @@ class Tags extends React.Component {
           <Tag
             key={i}
             label={tag}
-            onPress={e => this.props.onTagPress(i, tag, e)}
+            onPress={() => {
+                this.state.tags.splice(i, 1)
+
+                this.setState(
+                    { tags: this.state.tags },
+                    () => this.props.onChangeTags && this.props.onChangeTags(this.state.tags)
+                )
+            }}
             tagContainerStyle={this.props.tagContainerStyle}
             tagTextStyle={this.props.tagTextStyle}
           />
@@ -101,7 +108,6 @@ Tags.propTypes = {
   initialText: PropTypes.string,
   initialTags: PropTypes.arrayOf(PropTypes.string),
   onChangeTags: PropTypes.func,
-  onTagPress: PropTypes.func,
   inputStyle: PropTypes.object,
   tagContainerStyle: PropTypes.object,
   tagTextStyle: PropTypes.object,
