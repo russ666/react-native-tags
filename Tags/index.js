@@ -14,7 +14,14 @@ Tag.propTypes = {
 };
 
 class Tags extends React.Component {
-  state = {};
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        tags: props.initialTags,
+        text: props.initialText
+    }
+  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
